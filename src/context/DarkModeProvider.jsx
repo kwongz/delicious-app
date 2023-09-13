@@ -1,9 +1,9 @@
 // DarkModeProvider.js
 import React, { useState } from "react";
-import DarkModeContext from "./context";
+import DarkModeContext from "./darkModeContext";
 
 const DarkModeProvider = ({ children }) => {
-	const [isDarkMode, setIsDarkMode] = useState(true);
+	const [isDarkMode, setIsDarkMode] = useState(false);
 
 	const toggleDarkMode = () => {
 		setIsDarkMode((prevMode) => !prevMode);

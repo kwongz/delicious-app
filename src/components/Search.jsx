@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import DarkModeContext from "../context/darkModeContext.js";
 
 function Search() {
 	const [input, setInput] = useState("");
 	const navigate = useNavigate();
+	const { isDarkMode } = useContext(DarkModeContext);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -14,7 +16,7 @@ function Search() {
 
 	return (
 		<div>
-			<FormStyle onSubmit={submitHandler}>
+			<FormStyle onSubmit={submitHandler} isDarkMode={isDarkMode}>
 				<FaSearch />
 				<input
 					onChange={(e) => setInput(e.target.value)}
@@ -31,9 +33,10 @@ const FormStyle = styled.form`
 	position: relative;
 	input {
 		border: none;
-		background: linear-gradient(35deg, #494949, #313131);
+		background: ${(props) =>
+			props.isDarkMode ? "linear-gradient(35deg, #494949, #313131)" : "#fff"};
 		font-size: 1.5rem;
-		color: white;
+		color: ${(props) => (props.isDarkMode ? "white" : "#333")};
 		padding: 1rem 3rem;
 		border: none;
 		border-radius: 1rem;
@@ -45,7 +48,7 @@ const FormStyle = styled.form`
 		top: 50%;
 		left: 0%;
 		transform: translate(100%, -50%);
-		color: white;
+		color: ${(props) => (props.isDarkMode ? "white" : "#333")};
 	}
 `;
 
